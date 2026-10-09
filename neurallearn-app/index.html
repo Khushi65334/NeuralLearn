@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>NeuralLearn | AI-Powered Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Background Effects (unchanged colors) -->
+    <div class="bg-effects">
+        <div class="bg-gradient-orb orb-1"></div>
+        <div class="bg-gradient-orb orb-2"></div>
+        <div class="bg-gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Landing Navbar (only visible on the landing page) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('landing')">
+                <div class="logo-icon"><i class="fas fa-brain"></i></div>
+                <span class="logo-text">NeuralLearn</span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <button class="nav-link active" onclick="showPage('landing')" data-page="landing">Home</button>
+                <button class="nav-cta" onclick="showPage('dashboard')">
+                    <i class="fas fa-rocket"></i> Get Started
+                </button>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- App Shell: sidebar + topbar, shown for every logged-in page -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+    <aside class="app-sidebar">
+        <div class="sidebar-logo" onclick="showPage('dashboard')">
+            <div class="logo-icon"><i class="fas fa-brain"></i></div>
+            <span class="logo-text">NeuralLearn</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-group">
+                <span class="sidebar-group-label">Main</span>
+                <button class="sidebar-link" data-page="dashboard" onclick="showPage('dashboard')"><i class="fas fa-gauge"></i><span>Dashboard</span></button>
+                <button class="sidebar-link" data-page="mylearning" onclick="showPage('mylearning')"><i class="fas fa-graduation-cap"></i><span>My Learning</span></button>
+                <button class="sidebar-link" data-page="explore" onclick="showPage('explore')"><i class="fas fa-magnifying-glass"></i><span>Explore</span></button>
+                <button class="sidebar-link" data-page="roadmap" onclick="showPage('roadmap')"><i class="fas fa-route"></i><span>Roadmap</span></button>
+            </div>
+            <div class="sidebar-group">
+                <span class="sidebar-group-label">Productivity</span>
+                <button class="sidebar-link" data-page="planly" onclick="showPage('planly')"><i class="fas fa-calendar-check"></i><span>Planly</span></button>
+                <button class="sidebar-link" data-page="notes" onclick="showPage('notes')"><i class="fas fa-note-sticky"></i><span>Notes</span></button>
+            </div>
+            <div class="sidebar-group">
+                <span class="sidebar-group-label">Practice</span>
+                <button class="sidebar-link" data-page="practice" onclick="showPage('practice')"><i class="fas fa-dumbbell"></i><span>Practice</span></button>
+                <button class="sidebar-link" data-page="challenges" onclick="showPage('challenges')"><i class="fas fa-flag-checkered"></i><span>Challenges</span></button>
+            </div>
+            <div class="sidebar-group">
+                <span class="sidebar-group-label">Other</span>
+                <button class="sidebar-link" data-page="analytics" onclick="showPage('analytics')"><i class="fas fa-chart-column"></i><span>Analytics</span></button>
+                <button class="sidebar-link" data-page="history" onclick="showPage('history')"><i class="fas fa-clock-rotate-left"></i><span>History</span></button>
+                <button class="sidebar-link" data-page="saved" onclick="showPage('saved')"><i class="fas fa-star"></i><span>Saved Courses</span></button>
+            </div>
+            <div class="sidebar-group">
+                <span class="sidebar-group-label">Account</span>
+                <button class="sidebar-link" data-page="profile" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Profile</span></button>
+                <button class="sidebar-link" data-page="settings" onclick="showPage('settings')"><i class="fas fa-gear"></i><span>Settings</span></button>
+            </div>
+        </nav>
+        <button class="sidebar-exit" onclick="showPage('landing')"><i class="fas fa-arrow-left"></i><span>Back to Home</span></button>
+    </aside>
+
+    <header class="topbar">
+        <button class="topbar-hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <button class="topbar-back-btn" id="topbarBackBtn" onclick="goBack()" style="display:none;">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <h1 class="topbar-title" id="topbarTitle">Dashboard</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Landing Page -->
+        <div class="page active" id="landing">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        Powered by Advanced AI
+                    </div>
+                    <h1 class="hero-title">
+                        Learn Smarter with<br>
+                        <span class="gradient">AI-Powered</span> Education
+                    </h1>
+                    <p class="hero-subtitle">
+                        Experience personalized learning like never before. NeuralLearn analyzes your goals,
+                        learning style, and progress to create the perfect educational journey just for you.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showPage('explore')">
+                            <i class="fas fa-rocket"></i>
+                            Start Learning Free
+                        </button>
+                        <button class="btn btn-secondary" onclick="showPage('dashboard')">
+                            <i class="fas fa-play"></i>
+                            View Dashboard
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="section-header">
+                    <div class="section-label"><i class="fas fa-star"></i> Why Choose Us</div>
+                    <h2 class="section-title">Features that Set Us Apart</h2>
+                    <p class="section-subtitle">Discover how our platform transforms the way you learn</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <h3 class="feature-title">Smart Recommendations</h3>
+                        <p class="feature-desc">A rule-based recommendation engine looks at your progress, saved courses and interests to suggest what's next.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="feature-title">Real Progress Tracking</h3>
+                        <p class="feature-desc">Every stat you see is calculated from your actual lesson completions — nothing is hard-coded.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-route"></i></div>
+                        <h3 class="feature-title">Interactive Roadmap</h3>
+                        <p class="feature-desc">Visual learning paths guide you from foundation to mastery, unlocked by what you actually complete.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
+                        <h3 class="feature-title">Planly &amp; Notes</h3>
+                        <p class="feature-desc">Plan your daily study goals and keep searchable notes, right alongside your courses.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats">
+                <div class="stats-container">
+                    <div class="stat-item"><div class="stat-value">55+</div><div class="stat-label">Courses Available</div></div>
+                    <div class="stat-item"><div class="stat-value">8</div><div class="stat-label">Skill Categories</div></div>
+                    <div class="stat-item"><div class="stat-value">4</div><div class="stat-label">Roadmap Stages</div></div>
+                    <div class="stat-item"><div class="stat-value">4.6</div><div class="stat-label">Average Course Rating</div></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div class="page" id="dashboard">
+            <div class="dashboard">
+                <div class="dashboard-header">
+                    <h1 class="greeting">Welcome back, <span id="greetingName" class="gradient-text">Alex</span> 👋</h1>
+                    <p class="greeting-sub" id="greetingSub">Ready to continue your learning journey?</p>
+                </div>
+
+                <div class="stat-cards-row">
+                    <div class="stat-card"><i class="fas fa-trophy"></i><div><span id="statCoursesCompleted">0</span><small>Courses Completed</small></div></div>
+                    <div class="stat-card"><i class="fas fa-clock"></i><div><span id="statLearningTime">0h</span><small>Learning Time</small></div></div>
+                    <div class="stat-card"><i class="fas fa-fire"></i><div><span id="statStreak">0</span><small>Day Streak</small></div></div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="main-column">
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-bullseye"></i> Today's Goal</h3><span id="dashGoalCount"></span></div>
+                            <div class="mini-progress-bar"><div class="mini-progress-fill" id="dashGoalBar" style="width:0%"></div></div>
+                            <span class="dash-goal-pct" id="dashGoalPct">0%</span>
+                            <div id="dashTodayPlan" class="mini-task-list"></div>
+                            <button class="btn btn-secondary btn-sm" onclick="showPage('planly')">Open Planly</button>
+                        </div>
+
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-play"></i> Continue Learning</h3></div>
+                            <div class="course-grid" id="continueRow"></div>
+                        </div>
+
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-sparkles"></i> Recommended For You</h3><a href="#" onclick="showPage('explore');return false;">See all</a></div>
+                            <div class="course-grid" id="recommended"></div>
+                        </div>
+                    </div>
+
+                    <div class="side-column">
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-note-sticky"></i> Quick Notes</h3><a href="#" onclick="showPage('notes');return false;">See all</a></div>
+                            <div id="dashNotes" class="mini-note-list"></div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-chart-column"></i> Weekly Activity</h3></div>
+                            <div id="dashWeekly"></div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-route"></i> Roadmap Stage</h3><a href="#" onclick="showPage('roadmap');return false;">View</a></div>
+                            <div id="dashRoadmapStage"></div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-clock-rotate-left"></i> Recent Activity</h3><a href="#" onclick="showPage('history');return false;">See all</a></div>
+                            <div id="dashActivity" class="activity-list"></div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="dash-card-header"><h3><i class="fas fa-star"></i> Saved Courses</h3><a href="#" onclick="showPage('saved');return false;">See all</a></div>
+                            <div id="dashSaved" class="mini-course-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Learning Page -->
+        <div class="page" id="mylearning">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">My Learning</h1>
+                    <p class="section-subtitle">Everything you're working on, finished, or saved for later</p>
+                </div>
+                <h3 class="subsection-title">In Progress</h3>
+                <div id="myLearningInProgress" class="learning-row-list"></div>
+
+                <h3 class="subsection-title">Completed</h3>
+                <div id="myLearningCompleted" class="learning-row-list"></div>
+
+                <h3 class="subsection-title">Saved Courses</h3>
+                <div id="myLearningSaved" class="course-grid"></div>
+            </div>
+        </div>
+
+        <!-- Explore Page -->
+        <div class="page" id="explore">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Explore Courses</h1>
+                    <p class="section-subtitle">Search the full catalog of 55+ courses</p>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search courses, skills, instructors..." onkeypress="handleSearch(event)">
+                    <button class="search-btn" onclick="performSearch()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="search-tags">
+                    <span class="search-tag" onclick="quickSearch('Python')">Python</span>
+                    <span class="search-tag" onclick="quickSearch('AI')">AI</span>
+                    <span class="search-tag" onclick="quickSearch('Web Development')">Web Development</span>
+                    <span class="search-tag" onclick="quickSearch('SQL')">SQL</span>
+                    <span class="search-tag" onclick="quickSearch('React')">React</span>
+                    <span class="search-tag" onclick="quickSearch('DSA')">DSA</span>
+                </div>
+
+                <div class="filters-bar">
+                    <select id="filterCategory" onchange="updateExploreFilter('category', this.value)">
+                        <option value="all">All Categories</option>
+                    </select>
+                    <select id="filterLevel" onchange="updateExploreFilter('level', this.value)">
+                        <option value="all">All Levels</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                    <select id="filterDuration" onchange="updateExploreFilter('duration', this.value)">
+                        <option value="all">Any Duration</option>
+                        <option value="short">Under 10 hrs</option>
+                        <option value="medium">10–30 hrs</option>
+                        <option value="long">30+ hrs</option>
+                    </select>
+                    <select id="filterRating" onchange="updateExploreFilter('rating', parseFloat(this.value))">
+                        <option value="0">Any Rating</option>
+                        <option value="4.5">4.5+</option>
+                        <option value="4.7">4.7+</option>
+                    </select>
+                    <select id="filterSort" onchange="updateExploreFilter('sort', this.value)">
+                        <option value="recommended">Recommended</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="shortest">Shortest</option>
+                        <option value="longest">Longest</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+
+                <p class="results-count" id="resultsCount">0 courses found</p>
+                <div class="results-grid" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Course Detail Page -->
+        <div class="page" id="courseDetail">
+            <div class="course-detail">
+                <div class="course-detail-header">
+                    <div class="course-detail-info">
+                        <h1 id="detailTitle">Course Title</h1>
+                        <div class="course-detail-meta">
+                            <span class="meta-item"><i class="fas fa-chalkboard-user"></i><span id="detailInstructor">Instructor</span></span>
+                            <span class="meta-item"><i class="fas fa-layer-group"></i><span id="detailLevel">Intermediate</span></span>
+                            <span class="meta-item"><i class="fas fa-clock"></i><span id="detailDuration">8 hours</span></span>
+                            <span class="meta-item"><i class="fas fa-star" style="color:#fbbf24;"></i><span id="detailRating">4.8</span></span>
+                            <span class="meta-item"><i class="fas fa-users"></i><span id="detailStudents">12,500 students</span></span>
+                        </div>
+                        <p class="course-description" id="detailDescription">Course description will appear here...</p>
+                        <div class="skill-chip-row" id="detailSkills"></div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary" onclick="watchOnYoutube()">
+                                <i class="fab fa-youtube"></i> Watch on YouTube
+                            </button>
+                            <button class="btn btn-secondary" id="markCompleteBtn" onclick="markComplete()">
+                                <i class="fas fa-check"></i> Mark Course Complete
+                            </button>
+                            <button class="btn btn-outline" id="detailSaveBtn" onclick="toggleSaveDetail()">
+                                <i class="far fa-star"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-player" id="videoPlayer">
+                        <div class="video-placeholder" onclick="watchOnYoutube()">
+                            <i class="fas fa-play-circle"></i>
+                            <p>Click to watch on YouTube</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-progress-section">
+                    <div class="progress-header">
+                        <h3>Your Progress</h3>
+                        <span class="progress-percentage" id="courseProgressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-large">
+                        <div class="progress-bar-fill" id="courseProgressBar" style="width:0%;"></div>
+                    </div>
+                </div>
+
+                <div class="lesson-section">
+                    <h3><i class="fas fa-list-check"></i> Lessons</h3>
+                    <div class="lesson-list" id="lessonList"></div>
+                </div>
+
+                <div class="related-videos">
+                    <div class="section-header" style="text-align:left;margin-bottom:2rem;">
+                        <h2 class="section-title">Related Courses</h2>
+                    </div>
+                    <div class="video-grid" id="relatedVideos"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Page -->
+        <div class="page" id="roadmap">
+            <div class="roadmap">
+                <div class="roadmap-header section-header">
+                    <div class="section-label"><i class="fas fa-route"></i> Your Learning Path</div>
+                    <h1 class="section-title">Progress Roadmap</h1>
+                    <p class="section-subtitle">Track your journey from foundation to mastery — click a course to open it, or tap the check to mark it complete</p>
+                </div>
+                <div class="roadmap-container" id="roadmapContainer"></div>
+            </div>
+        </div>
+
+        <!-- Planly Page -->
+        <div class="page" id="planly">
+            <div class="page-inner">
+                <div class="planly-header">
+                    <div>
+                        <h1 class="section-title" style="text-align:left;">Today's Plan</h1>
+                        <p class="section-subtitle" style="margin:0;" id="planlyDate">—</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openAddTask()"><i class="fas fa-plus"></i> Add Task</button>
+                </div>
+
+                <div class="dash-card">
+                    <div class="dash-card-header"><h3>Daily Goal Progress</h3><span id="planlyGoalText">0 / 0 tasks completed</span></div>
+                    <div class="mini-progress-bar large"><div class="mini-progress-fill" id="planlyGoalBar" style="width:0%"></div></div>
+                    <span class="dash-goal-pct" id="planlyGoalPct">0%</span>
+                </div>
+
+                <div class="planly-tabs">
+                    <button class="planly-tab active" onclick="filterPlanly('today', this)">Today</button>
+                    <button class="planly-tab" onclick="filterPlanly('upcoming', this)">Upcoming</button>
+                    <button class="planly-tab" onclick="filterPlanly('completed', this)">Completed</button>
+                    <button class="planly-tab" onclick="filterPlanly('all', this)">All</button>
+                </div>
+
+                <div id="taskList" class="task-list"></div>
+            </div>
+        </div>
+
+        <!-- Task Modal -->
+        <div class="modal-overlay" id="taskModal">
+            <div class="modal-box">
+                <h3 id="taskModalTitle">Add Task</h3>
+                <label>Task</label>
+                <input type="text" id="taskInputText" placeholder="e.g. Solve 5 DSA problems">
+                <div class="modal-row">
+                    <div>
+                        <label>Priority</label>
+                        <select id="taskInputPriority">
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Date</label>
+                        <input type="date" id="taskInputDate">
+                    </div>
+                    <div>
+                        <label>Time (optional)</label>
+                        <input type="time" id="taskInputTime">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeTaskModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveTaskFromModal()">Save Task</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Page -->
+        <div class="page" id="notes">
+            <div class="page-inner">
+                <div class="planly-header">
+                    <div>
+                        <h1 class="section-title" style="text-align:left;">My Notes</h1>
+                        <p class="section-subtitle" style="margin:0;">Keep track of what you learn</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openNewNote()"><i class="fas fa-plus"></i> New Note</button>
+                </div>
+                <div class="search-box small">
+                    <input type="text" id="notesSearchInput" placeholder="Search notes..." oninput="searchNotes()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div id="notesList" class="notes-grid"></div>
+            </div>
+        </div>
+
+        <!-- Note Modal -->
+        <div class="modal-overlay" id="noteModal">
+            <div class="modal-box">
+                <h3 id="noteModalTitle">New Note</h3>
+                <label>Title</label>
+                <input type="text" id="noteInputTitle" placeholder="Note title">
+                <label>Content</label>
+                <textarea id="noteInputContent" rows="8" placeholder="Write your note..."></textarea>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeNoteModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveNoteFromModal()">Save Note</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="page" id="practice">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Practice</h1>
+                    <p class="section-subtitle">Short problem sets to reinforce what you're learning</p>
+                </div>
+                <div id="practiceList" class="practice-grid"></div>
+            </div>
+        </div>
+
+        <!-- Challenges Page -->
+        <div class="page" id="challenges">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Challenges</h1>
+                    <p class="section-subtitle">Bigger, project-style problems to test yourself</p>
+                </div>
+                <div id="challengesList" class="practice-grid"></div>
+            </div>
+        </div>
+
+        <!-- Analytics Page -->
+        <div class="page" id="analytics">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Analytics</h1>
+                    <p class="section-subtitle">Your learning activity, from real data</p>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header"><h3>Weekly Learning Activity</h3></div>
+                    <div id="analyticsChart"></div>
+                </div>
+                <div class="analytics-stats-grid">
+                    <div class="stat-card"><i class="fas fa-clock"></i><div><span id="analyticsTotalHours">0h</span><small>Total Learning Hours</small></div></div>
+                    <div class="stat-card"><i class="fas fa-gauge-high"></i><div><span id="analyticsAvgDaily">0 min</span><small>Average Daily</small></div></div>
+                    <div class="stat-card"><i class="fas fa-trophy"></i><div><span id="analyticsCoursesCompleted">0</span><small>Courses Completed</small></div></div>
+                    <div class="stat-card"><i class="fas fa-list-check"></i><div><span id="analyticsLessons">0</span><small>Lessons Completed</small></div></div>
+                    <div class="stat-card"><i class="fas fa-fire"></i><div><span id="analyticsStreak">0 days</span><small>Current Streak</small></div></div>
+                    <div class="stat-card"><i class="fas fa-star"></i><div><span id="analyticsTopSubject">—</span><small>Most Studied Subject</small></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Page -->
+        <div class="page" id="history">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Learning History</h1>
+                    <p class="section-subtitle">Everything you've done, automatically logged</p>
+                </div>
+                <div class="history-tabs">
+                    <button class="history-filter-btn active" onclick="filterHistory('all', this)">All</button>
+                    <button class="history-filter-btn" onclick="filterHistory('course_completed', this)">Courses Completed</button>
+                    <button class="history-filter-btn" onclick="filterHistory('lesson_completed', this)">Lessons Completed</button>
+                    <button class="history-filter-btn" onclick="filterHistory('note_created', this)">Notes</button>
+                    <button class="history-filter-btn" onclick="filterHistory('task_completed', this)">Tasks</button>
+                </div>
+                <div id="historyList"></div>
+            </div>
+        </div>
+
+        <!-- Saved Courses Page -->
+        <div class="page" id="saved">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Saved Courses</h1>
+                    <p class="section-subtitle">Courses you've bookmarked for later</p>
+                </div>
+                <div id="savedCoursesGrid" class="course-grid"></div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profile">
+            <div class="page-inner">
+                <div class="planly-header">
+                    <div>
+                        <h1 class="section-title" style="text-align:left;">Profile</h1>
+                        <p class="section-subtitle" style="margin:0;">Your learning identity</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="openEditProfile()"><i class="fas fa-pen"></i> Edit Profile</button>
+                </div>
+                <div class="profile-grid">
+                    <div class="dash-card">
+                        <div class="profile-avatar"><i class="fas fa-user"></i></div>
+                        <h2 id="profileName">Alex</h2>
+                        <p><strong>Learning Goal:</strong> <span id="profileGoal">—</span></p>
+                        <p><strong>Skill Level:</strong> <span id="profileLevel">—</span></p>
+                        <p><strong>Interests:</strong></p>
+                        <div class="skill-chip-row" id="profileInterests"></div>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Stats</h3>
+                        <div class="stat-cards-row">
+                            <div class="stat-card"><i class="fas fa-trophy"></i><div><span id="profileCoursesCompleted">0</span><small>Completed</small></div></div>
+                            <div class="stat-card"><i class="fas fa-clock"></i><div><span id="profileLearningTime">0h</span><small>Learning Time</small></div></div>
+                            <div class="stat-card"><i class="fas fa-fire"></i><div><span id="profileStreak">0</span><small>Streak</small></div></div>
+                        </div>
+                        <h3>Skills</h3>
+                        <div id="profileSkills" class="skill-row-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Edit Modal -->
+        <div class="modal-overlay" id="profileModal">
+            <div class="modal-box">
+                <h3>Edit Profile</h3>
+                <label>Name</label>
+                <input type="text" id="profileInputName">
+                <label>Learning Goal</label>
+                <input type="text" id="profileInputGoal">
+                <label>Skill Level</label>
+                <select id="profileInputLevel">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <label>Interests (comma-separated)</label>
+                <input type="text" id="profileInputInterests" placeholder="Python, AI & ML, Web Development">
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeProfileModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveProfileFromModal()">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="page" id="settings">
+            <div class="page-inner">
+                <div class="section-header" style="text-align:left;">
+                    <h1 class="section-title">Settings</h1>
+                    <p class="section-subtitle">Manage your account and data</p>
+                </div>
+                <div class="dash-card">
+                    <h3>Account</h3>
+                    <label>Display Name</label>
+                    <input type="text" id="settingsName" disabled>
+                    <p class="empty-hint">Edit your name from the Profile page.</p>
+                </div>
+                <div class="dash-card">
+                    <h3>Data</h3>
+                    <p class="empty-hint">All your data (tasks, notes, progress, history) is stored locally on this device.</p>
+                    <button class="btn btn-outline" style="color:#ef4444;border-color:#ef4444;" onclick="resetAllData()"><i class="fas fa-trash"></i> Reset All Data</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- NeuralBot Chatbot -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title"><i class="fas fa-robot"></i> NeuralBot</div>
+            <button class="chatbot-close" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-message bot"><div class="chat-bubble">Hi! I'm NeuralBot. Ask me for a course recommendation, your progress, or your tasks.</div></div>
+            <div class="chat-suggestions">
+                <span class="chat-suggestion" onclick="quickChat('Recommend a course')">Recommend a course</span>
+                <span class="chat-suggestion" onclick="quickChat('How am I doing?')">My progress</span>
+                <span class="chat-suggestion" onclick="quickChat('Show my tasks')">My tasks</span>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Ask NeuralBot..." onkeypress="handleChatKeypress(event)">
+            <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

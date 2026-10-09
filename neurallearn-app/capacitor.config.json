@@ -1,0 +1,6 @@
+{
+  "appId": "com.neurallearn.app",
+  "appName": "NeuralLearn",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}
